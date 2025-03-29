@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Advice generator app" />
+    <meta name="author" content="John Andrew San Victores" />
+    <meta name="keywords" content="Frontend Mentor, Advice generator app" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1f1f1f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Advice generator app" />
+    <meta name="msapplication-TileColor" content="#1f1f1f" />
+    <meta
+      name="msapplication-TileImage"
+      content="./images/favicon-144x144.png"
+    />
+    <meta name="msapplication-config" content="./images/browserconfig.xml" />
+    <meta name="theme-color" content="#1f1f1f" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Advice generator app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      body {
+        background-color: hsl(218, 23%, 16%);
+        gap: 3em;
+        height: 100vh;
+        font-weight: 800;
+        font-family: "Manrope", sans-serif;
+        padding: 1em;
+      }
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+        color: hsl(193, 38%, 86%);
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+
+      .card {
+        background-color: hsl(217, 19%, 24%);
+        width: 100%;
+        max-width: 32em;
+        border-radius: 5px;
+        padding: 3em 1.5em;
+        gap: 2em;
+        border-radius: 10px;
+        position: relative;
+      }
+
+      .card > p {
+        font-size: 12px;
+        letter-spacing: 4px;
+        text-align: center;
+        color: hsl(150, 100%, 66%);
+      }
+
+      #quote {
+        font-size: 28px;
+        text-align: center;
+        color: hsl(193, 38%, 86%);
+      }
+
+      .divider,
+      .divider img {
+        width: 100%;
+      }
+
+      #btn {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: hsl(150, 100%, 66%);
+        width: 3em;
+        height: 3em;
+        border-radius: 50%;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      #btn:hover {
+        box-shadow: 0px 0px 20px 2px hsl(150, 100%, 66%);
+        transition: 0.2s ease-in-out;
+      }
+
+      #btn img {
+        width: 1.2em;
+        aspect-ratio: 1/1;
+      }
+    </style>
+  </head>
+  <body class="col">
+    <div class="card col">
+      <p>ADVICE #<span id="adv-id">1</span></p>
+      <h6 id="quote">
+        "It is easy to sit up and take notice, what's difficult is getting up
+        and taking action"
+      </h6>
+      <div class="divider">
+        <img src="./images/pattern-divider-desktop.svg" alt="divider" />
+      </div>
+      <button id="btn" class="btn col">
+        <img src="./images/icon-dice.svg" alt="dice icon" />
+      </button>
+    </div>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">John Andrew San Victores</a>.
+    </div>
+
+    <script>
+      const quote = document.getElementById("quote");
+      const advId = document.getElementById("adv-id");
+      const btn = document.getElementById("btn");
+
+      async function getAdvice() {
+        const res = await fetch("https://api.adviceslip.com/advice");
+        const data = await res.json();
+        return data.slip;
+      }
+
+      async function updateQuote() {
+        const advice = await getAdvice();
+        quote.innerText = `"${advice.advice}"`;
+        advId.innerText = advice.id;
+      }
+
+      btn.addEventListener("click", updateQuote);
+    </script>
+  </body>
+</html>
