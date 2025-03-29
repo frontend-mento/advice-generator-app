@@ -31,7 +31,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/frontend-mento/advice-generator-app](https://github.com/frontend-mento/advice-generator-app)
-- Live Site URL: [https://frontend-mento.github.io/advice-generator-app](https://frontend-mento.github.io/advice-generator-app)
+- Live Site URL: [https://advice-generator-app-snowy-pi.vercel.app](https://advice-generator-app-snowy-pi.vercel.app)
 
 ## My Process
 
